@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+
+{% extends "layout.html" %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block main %}
+
+    <body>
+
+        <h1>Enter Stock Symbols below to compare</h1>
+        <pre><h4 class="text-info">Input at least two, up to three, stock symbols to compare these stocks</h4></pre>
+        <form action="/compare" method="post">
+            {{ form.csrf_token }}
+
+            <fieldset class="symbol">
+            {{ form.symbol1.label }}
+            {{ form.symbol1(placeholder='Stock Symbol 1') }}
+            {% if form.symbol1.errors %}
+              <ul class="errors">
+                {% for error in form.symbol1.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+            </fieldset>
+
+            <fieldset class="symbol">
+            {{ form.symbol2.label }}
+            {{ form.symbol2(placeholder='Stock Symbol 2') }}
+            {% if form.symbol2.errors %}
+              <ul class="errors">
+                {% for error in form.symbol2.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+            </fieldset>
+
+            <fieldset class="symbol">
+            {{ form.symbol3.label }}
+            {{ form.symbol3(placeholder='Stock Symbol 3') }}
+            {% if form.symbol3.errors %}
+              <ul class="errors">
+                {% for error in form.symbol3.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+            </fieldset>
+
+          <div class="submit-button">
+            {{ form.submit }}
+          </div>
+
+        </form>
+
+        <footer class="small text-center text-muted">
+            Data provided for free by <a href="https://iextrading.com/developer">IEX</a>. View <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>.
+        </footer>
+    </body>
+{% endblock %}

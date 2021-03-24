@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block main %}
+    <div  class="row justify-content-center pt-2 pb-4 mx-auto">
+        <h1 id="comp_name">Welcome</h1>
+    </div>
+
+    <div class="row justify-content-around">
+	    <div class="col-5 ml-5 mx-5">
+	        <div class="row">
+    	    	<h4>Welcome to My Portfolio Manager. This is your personal application to view company stocks in detail.
+    	    	    You can search any stock by stock symbol. This search will return a full detailed analysis of this stocks
+    	    	    current and historical details. The share price data over a range of time periods, the latest news on this
+    	    	    company and details stock information.</h4>
+    	    	<h4>For clear decision making between multiple stocks or a multi stock review; Use the comparison tool.
+    	    	This allows the comparison of up to three stocks in a compiled view.</h4>
+    	    	<h4>To ease future interactions stocks can be saved to your user account. This is accessed through the
+    	    	user dashboard. This allows for quick access to the detailed view of that stock.</h4>
+    	    	<h4>All stock data is provided by <a href="https://iextrading.com/developer">IEX</a>
+    	    	. For more information on this data please view <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>
+    	    	</h4>
+    	    </div>
+
+        </div>
+
+    	<div  class="col-4 ml-2">
+    	    <div class="card bg-secondary border-0 m-0 p-0 ">
+    	        <div class="row justify-content-center">
+
+        		    <h2>Tools</h2>
+        	    </div>
+            	<table id="all_tool" class="table">
+                        <tr>
+                            <th><h3><a class="nav-link" href="{{ url_for('stock_bp.single') }}">Single Stock Lookup</a></h3>
+                            <p>Use this tool to search a single stock for a detail view of that company.</p></th>
+                        </tr>
+                        <tr>
+                            <td class="mid_tool"><h3><a class="nav-link" href="{{ url_for('stock_bp.compare') }}">Compare Stocks</a></h3>
+                            <p>Use this tool to search and compare three stocks.</p></td>
+                        </tr>
+                        {% if current_user.is_authenticated %}
+                        <tr>
+                            <th><h3><a class="nav-link" href="{{ url_for('user_bp.dashboard') }}">{{current_user.firstname}} {{current_user.lastname}}'s Dashboard</a></h3>
+                            <p>View your current dashboard for quick access to your watchlist. </p>
+                            <p>Here you can edit this watchlist.</p></th>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <th ><h3><a class="nav-link" href="{{ url_for('user_bp.dashboard') }}">Dashboard</a></h3>
+                            <p>View your current dashboard for quick access to your watchlist. </p>
+                            <p>Here you can edit this watchlist.</p></th>
+                        </tr>
+                        <tr>
+                            <th>Please sign in to access these tools</th>
+                        </tr>
+                        {% endif %}
+                </table>
+             </div>
+        </div>
+
+    </div>
+{% endblock %}

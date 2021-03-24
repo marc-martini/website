@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+{% extends "layout.html" %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block head %}
+    <meta id="stock" data-stock = "{{symbol}}" data-name = "{{quote['name']}} ({{quote['symbol']}})">
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script type=text/javascript src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="/static/stock_data.js"></script>
+
+{% endblock %}
+
+{% block message_head %}
+<div id=mess>
+
+    </div>
+
+{% endblock %}
+
+{% block main %}
+    <div  class="row justify-content-center pt-2 pb-4 mx-auto border-bottom">
+
+    	    <img id="logo" src="{{logo}}" alt="{{quote['symbol']}} Logo" >
+
+        <div class="col-5 pt-4">
+            <h1 id="comp_name"><a  href="{{comp['web']}}">{{quote['name']}} ({{quote['symbol']}})</a> Details</h1>
+        </div>
+    </div>
+
+    <div class="row">
+	    <div class="col-6 px-4">
+	        <div class="row justify-content-center">
+    	    	<h2>General Details</h2>
+    	    </div>
+    	    <div class="row py-2">
+    	    	<table  class="table" style="width:100%">
+                    <tr class="thead-dark">
+                        <th>Current Share Price</th>
+                        <th>Change</th>
+                        <th>Percent Change</th>
+                    </tr>
+                    <tr>
+                        <td>{{quote['price']}}</td>
+                        <td>{{quote['change']}}</td>
+                        <td>{{quote['change_per']}}</td>
+                    </tr>
+                    <tr class="thead-dark">
+                        <th>Change Year to Date</th>
+                        <th>52 Week High</th>
+                        <th>52 Week Low</th>
+                    </tr>
+                    <tr>
+                        <td>{{quote['ytdchange']}}</td>
+                        <td>{{quote['yearhigh']}}</td>
+                        <td>{{quote['yearlow']}}</td>
+                    </tr>
+                    <tr class="thead-dark">
+                        <th>PE Ratio</th>
+                        <th>Trade Volume</th>
+                        <th>Market Capitalisation</th>
+                    </tr>
+                    <tr>
+                        <td>{{quote['per']}}</td>
+                        <td>{{quote['volume']}}</td>
+                        <td>{{quote['mkcap']}}</td>
+                    </tr>
+                    <tr class="thead-dark">
+                        <th>Earnings Per Share</th>
+                        <th>Dividend</th>
+                        <th>Dividend Yield %</th>
+                    </tr>
+                    <tr>
+                        <td>{{quote['eps']}}</td>
+                        <td>{{quote['div']}}</td>
+                        <td>{{quote['divyield']}}</td>
+                    </tr>
+                </table>
+                <button style="float:right;" class="btn btn-info" id="#stock" onclick=add_stock_db($(this).attr('id'))>Add this company to profile</button>
+
+    	    </div>
+    	   <div class="row py-3">
+    	       <div class="card border-0 m-0 p-0 ">
+	                <h4 class="heading-large pt-1">News</h4>
+		            <div class="card-body m-0 p-0 postList border-0">
+
+		            {% for item in news %}
+			            <a href= {{item['url']}} class="media border-top border-bottom">
+    				        <div class="media">
+    					        <img class="mr-3 img-fluid"  alt = '' src={{item['image']}}>
+
+    					        <div class="media-body pt-1">
+    			  			        <p id="title-lm"> {{item['headline']}}</p>
+    			    		        <p id='news_summ'> {{item['summary']}}</p>
+    						        <div id="news_dets" >
+    				  			        <div  id="news_auth">- {{item['source']}} </div>
+    				    		        <div id="news_date"> {{item['datetime']}} </div>
+    				    	        </div>
+    			  		        </div>
+    				        </div>
+			            </a>
+		            {% endfor %}
+		            </div>
+                </div>
+    	   </div>
+        </div>
+
+    	<div  class="col-6 px-2 ">
+    	    <div class="row justify-content-center">
+        		<h2>Stock Price Detail</h2>
+        	</div>
+        	<div id ="graph" class="row py-2 mx-3">
+    		        <embed class="histo" type="image/svg+xml" src={{graph|safe}} />
+    		    </div>
+    		<div class="row py-2 mx-3">
+
+                <form>
+                    <label for="histo_graph">Select Stock Time Scale</label>
+                    <select href=# name="rng" id=rng1>
+                        <option value="1d" selected = "selected">1 Day</option>
+                        <option value="5d">5 Days</option>
+                        <option value="1m">1 Month</option>
+                        <option value="3m">3 Months</option>
+                        <option value="6m">6 Months</option>
+                        <option value="1y">1 Year</option>
+                        <option value="5y">5 Years</option>
+                        <option value="max">Max</option>
+                    </select>
+                </form>
+            </div>
+
+            <div class="row py-3 mx-2">
+                <h2 id="name_det">{{quote['name']}} Company Details</h2>
+                <table id="table_det" class="table">
+                    <tr>
+                        <th>Company Description</th>
+                    </tr>
+                    <tr>
+                        <td class="table_info">{{comp['des']}}</td>
+                    </tr>
+                    <tr>
+                        <th>Current CEO</th>
+                    </tr>
+                    <tr>
+                        <td class="table_info">{{comp['ceo']}}</td>
+                    </tr>
+                    <tr>
+                        <th>Country</th>
+                    </tr>
+                    <tr>
+                        <td class="table_info">{{comp['country']}}</td>
+                    </tr>
+                    <tr>
+                        <th>Sector</th>
+                    </tr>
+                    <tr>
+                        <td class="table_info">{{comp['sect']}}</td>
+                    </tr>
+                    <tr>
+                        <th>Industry</th>
+                    </tr>
+                    <tr>
+                        <td class="table_info">{{comp['indus']}}</td>
+                    </tr>
+                </table>
+
+    	    </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+        <footer class="small text-center text-muted">
+            Data provided for free by <a href="https://iextrading.com/developer">IEX</a>. View <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>.
+        </footer>
+
+    </body>
+
+{% endblock %}
+
+
+

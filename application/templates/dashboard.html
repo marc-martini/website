@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+
+{% block head %}
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script type=text/javascript src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/static/stock_data.js"></script>
+{% endblock %}
+
+{% block main %}
+    <h2>{{current_user.firstname}} {{current_user.lastname}}'s Dashboard</h2>
+
+    <table class="table">
+        <h3></h3>
+        <tr class="thead-light">
+            <th><h4>Stock</h4></th>
+            <th><h4>Symbol</h4></th>
+            <th><h4>Date Added</h4></th>
+            <th></th>
+        </tr>
+        {% for stock in watch %}
+        <tr>
+        <td><form action="/_index" method="post">
+                <button type="submit" name='stock' class = btn-link value="{{stock.symbol}}">{{stock.name}}</button>
+            </form></td>
+        <td>{{stock.symbol}}</td>
+        <td>{{stock.date}}</td>
+        <td> <form class="remove_stock" action="/_remove_stock_db">
+            <input type="hidden" name="sym" value="{{stock.symbol}}" />
+            <input type="hidden" name="name" value="{{stock.name}}" />
+            <button class="btn btn-secondary" type="submit">Stop Tracking</button>
+        </form></td>
+        {% endfor %}
+    </table>
+
+    <form class="change" action="/changepw">
+        <button class="btn btn-secondary" type="submit">Change Password</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+{% extends "layout.html" %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block head %}
+    <meta id="stock1" data-stock = "{{syms[0]}}" data-name = "{{quotes[0]['name']}} ({{quotes[0]['symbol']}})">
+
+    <meta id="stock2" data-stock = "{{syms[1]}}" data-name = "{{quotes[1]['name']}} ({{quotes[1]['symbol']}})">
+
+    {% if num == 3 %}
+        <meta id="stock3" data-stock = "{{syms[2]}}" data-name = "{{quotes[2]['name']}} ({{quotes[2]['symbol']}})">
+
+    {% else %}
+        <meta id="stock3" data-stock = "None" data-name = "None">
+
+
+    {% endif %}
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script type=text/javascript src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/static/stock_data.js"></script>
+
+
+{% endblock %}
+
+{% block message_head %}
+<div id=mess>
+
+    </div>
+
+{% endblock %}
+
+{% block main %}
+    <div  class="row justify-content-center pt-2 pb-4 mx-auto border-bottom">
+        <h1 id="comp_name">Stock Comparison</h1>
+    </div>
+
+    <div class="row">
+	    <div class="col-6 px-4">
+	        <div class="row justify-content-center">
+    	    	<h2>General Details</h2>
+    	    </div>
+    	    <div class="row py-2">
+    	    	<table  class="table" style="width:100%">
+    	    	    <tr>
+                        <th></th>
+                        {% for name in names %}
+                            <th>
+                                <img src="{{logo[loop.index - 1]}}" alt="{{quotes[loop.index - 1]['symbol']}} Logo" style="float:left;width:30px;height:30px;margin-right:2.5px;">
+                                <form action="/_index" method="post">
+                                    <button type="submit" name='stock' class = btn-link value="{{syms[loop.index - 1]}}" >{{name}}</button>
+                                </form>
+                            </th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th class="table-dark" >Current Share Price</th>
+                        {% for quote in quotes %}
+                            <td>{{quote["price"]}}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th class="table-dark">Change Since Last Close</th>
+                        {% for quote in quotes %}
+                            <td>{{quote["change"]}}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th class="table-dark">Percent Change Since Last Close</th>
+                        {% for quote in quotes %}
+                            <td>{{quote["change_per"]}}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th class="table-dark">Change Year to Date</th>
+                        {% for quote in quotes %}
+                            <td>{{quote["ytdchange"]}}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th class="table-dark">52 Week High</th>
+                        {% for quote in quotes %}
+                            <td>{{quote["yearhigh"]}}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th class="table-dark">52 Week Low</th>
+                        {% for quote in quotes %}
+                            <td>{{quote["yearlow"]}}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th class="table-dark">PE Ratio</th>
+                        {% for quote in quotes %}
+                            <td>{{quote["per"]}}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th class="table-dark">Trade Volume</th>
+                        {% for quote in quotes %}
+                            <td>{{quote["volume"]}}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th class="table-dark">Market Capitalisation</th>
+                        {% for quote in quotes %}
+                            <td>{{quote["mkcap"]}}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th class="table-dark">Earnings Per Share</th>
+                        {% for quote in quotes %}
+                            <td>{{quote["eps"]}}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th class="table-dark">Dividend</th>
+                        {% for quote in quotes %}
+                            <td>{{quote["div"]}}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th class="table-dark">Dividend Yield %</th>
+                        {% for quote in quotes %}
+                            <td>{{quote["divyield"]}}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>                </th>
+                        {% for quote in quotes %}
+                            <td> <button id="#stock{{loop.index}}" onclick=add_stock_db($(this).attr('id'))>Track Company {{loop.index}}</button></th>
+                        {% endfor %}
+                    </tr>
+                </table>
+    	    </div>
+
+        </div>
+
+    	<div  class="col-6 px-2 ">
+    	    <div class="row justify-content-center">
+        		<h2>Stock Price Detail - Comparison</h2>
+        	</div>
+        	<div id ="graph" class="row py-2 mx-3">
+    		        <embed class="histo" type="image/svg+xml" src={{graph|safe}} />
+    		    </div>
+    		<div class="row py-2 mx-3">
+
+                <form>
+                    <label for="histo_graph">Select Stock Time Scale</label>
+                    <select href=# name="rng" id=rng>
+                        <option value="1d" selected = "selected">1 Day</option>
+                        <option value="5d">5 Days</option>
+                        <option value="1m">1 Month</option>
+                        <option value="3m">3 Months</option>
+                        <option value="6m">6 Months</option>
+                        <option value="1y">1 Year</option>
+                        <option value="5y">5 Years</option>
+                        <option value="max">Max</option>
+                    </select>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer class="small text-center text-muted">
+        Data provided for free by <a href="https://iextrading.com/developer">IEX</a>. View <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>.
+    </footer>
+
+{% endblock %}
+
+
+

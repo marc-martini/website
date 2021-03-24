@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+
+{% extends "layout.html" %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block main %}
+
+    <body>
+
+        <h1>Enter Stock Symbol below for quote</h1>
+        <pre><h4 class="text-info" >Input the stocks symbol to view.</h4></pre>
+        <form action="/single" method="post">
+            {{ form.csrf_token }}
+
+            <fieldset class="symbol">
+            {{ form.symbol.label }}
+            {{ form.symbol(placeholder='Stock Symbol') }}
+            {% if form.symbol.errors %}
+              <ul class="errors">
+                {% for error in form.symbol.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+        </fieldset>
+
+        <div class="submit-button">
+            {{ form.submit }}
+        </div>
+
+        </form>
+
+    <footer class="small text-center text-muted">
+            Data provided for free by <a href="https://iextrading.com/developer">IEX</a>. View <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>.
+    </footer>
+    </body>
+{% endblock %}
