@@ -78,7 +78,7 @@ def quote_data(user_symbol):
 
 
     # Test calls for API data to configure
-    api_key_test = getenv("API_KEY_test")
+    api_key_test = os.getenv("API_KEY_test")
     '''
     response_chart = requests.get("https://sandbox.iexapis.com/stable/stock/{}/quote/?token={}".format(symbol,api_key_test))
     '''
