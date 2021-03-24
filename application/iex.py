@@ -27,7 +27,7 @@ def histo_data(user_symbol, rng):
 
     # Full calls for API data
 
-    api_key = os.environ.get("API_KEY")
+    api_key = os.getenv("API_KEY")
     response_chart = requests.get("https://cloud-sse.iexapis.com/stable/stock/{}/chart/{}?token={}".format(symbol,chart_range,api_key))
     print(response_chart)
     '''
@@ -67,7 +67,7 @@ def quote_data(user_symbol):
 
     # Full calls for API data
 
-    api_key = os.environ.get("API_KEY")
+    api_key = os.getenv("API_KEY")
 
     response_chart = requests.get("https://cloud-sse.iexapis.com/stable/stock/{}/quote?token={}".format(symbol,api_key))
     '''
@@ -76,15 +76,15 @@ def quote_data(user_symbol):
     div_chart = requests.get("https://cloud-sse.iexapis.com/stable/stock/{}/dividends/?token={}".format(symbol,api_key))
     stats_chart = requests.get("https://cloud-sse.iexapis.com/stable/stock/{}/stats/dividendYield?token={}".format(symbol,api_key))
 
-    
+
     # Test calls for API data to configure
-    api_key_test = os.environ.get("API_KEY_test")
+    api_key_test = getenv("API_KEY_test")
     '''
     response_chart = requests.get("https://sandbox.iexapis.com/stable/stock/{}/quote/?token={}".format(symbol,api_key_test))
     '''
-    
+
     earn_chart = requests.get("https://sandbox.iexapis.com/stable/stock/{}/earnings/?token={}".format(symbol,api_key_test))
-    
+
     '''
     div_chart = requests.get("https://sandbox.iexapis.com/stable/stock/{}/dividends/?token={}".format(symbol,api_key_test))
     stats_chart = requests.get("https://sandbox.iexapis.com/stable/stock/{}/stats/dividendYield?token={}".format(symbol,api_key_test))
@@ -136,7 +136,7 @@ def company_data(user_symbol):
 
     # Full calls for API data
 
-    api_key = os.environ.get("API_KEY")
+    api_key = os.getenv("API_KEY")
 
     response_chart = requests.get("https://cloud-sse.iexapis.com/stable/stock/{}/company?token={}".format(symbol,api_key))
     '''
@@ -165,7 +165,7 @@ def logo(user_symbol):
     symbol = urllib.parse.quote_plus(user_symbol)
 
 
-    api_key = os.environ.get("API_KEY")
+    api_key = os.getenv("API_KEY")
 
     # get the type of data to be pulled from IEX
     response_chart = requests.get("https://cloud-sse.iexapis.com/stable/stock/{}/logo?token={}".format(symbol,api_key))
@@ -185,7 +185,7 @@ def news(user_symbol):
     symbol = urllib.parse.quote_plus(user_symbol)
 
 
-    api_key = os.environ.get("API_KEY")
+    api_key = os.getenv("API_KEY")
 
     # get the type of data to be pulled from IEX
     news_response = requests.get("https://cloud-sse.iexapis.com/stable/stock/{}/news?token={}".format(symbol,api_key))
