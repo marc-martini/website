@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block main %}
+    <div  class="row justify-content-center pt-2 pb-4 mx-auto">
+        <h1 id="comp_name">Welcome</h1>
+    </div>
+
+    <div class="row justify-content-around">
+	    <div class="col-5 ml-5 mx-5">
+	        <div class="row">
+    	    	<h4>Welcome to My website.</h4>
+    	    	<h4>This is my personal site</h4>
+    	    	<h4>My name is Marc Martinho.</h4>
+    	    	<h4> You can find me on  <a href="https://www.linkedin.com/in/marc-martinho-914693a0/">LinkedIn</a></h4>
+    	    </div>
+
+        </div>
+
+    	<div  class="col-4 ml-2">
+    	    <div class="card bg-secondary border-0 m-0 p-0 ">
+    	        <div class="row justify-content-center">
+
+        		    <h2>My Applications</h2>
+        	    </div>
+            	<table id="all_tool" class="table">
+                        <tr>
+                            <th><h3><a class="nav-link" href="{{ url_for('stock_bp.stock_home') }}">Stock Porfolio Manager</a></h3>
+                            <p>My Portfolio Manager. This is your personal application to view company stocks in detail.
+                    	    	    You can search any stock by stock symbol. This search will return a full detailed analysis of this stocks
+                    	    	    current and historical details. The share price data over a range of time periods, the latest news on this
+                    	    	    company and details stock information.</p></th>
+                        </tr>
+                        <tr>
+                            <td class="mid_tool"></td>
+                        </tr>
+                        {% if current_user.is_authenticated %}
+                        <tr>
+                            <th><h3></th>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <th ><h3>/th>
+                        </tr>
+                        <tr>
+                            <th>Please sign in to access these tools</th>
+                        </tr>
+                        {% endif %}
+                </table>
+             </div>
+        </div>
+
+    </div>
+{% endblock %}

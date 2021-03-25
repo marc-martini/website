@@ -23,7 +23,7 @@ def create_app():
     with app.app_context():
         # Application Routes
         #from . import routes, user, stocks
-        from . import user, stock
+        from . import user, stock, main
 
         db.create_all()
 

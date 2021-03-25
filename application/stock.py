@@ -10,15 +10,15 @@ from .db_models import db, UserStock
 stock_bp = Blueprint('stock_bp', __name__)
 
 
-@stock_bp.route('/', methods=['GET'])
-def home():
-    """Homepage"""
+@stock_bp.route('/stock', methods=['GET'])
+def stock_home():
+    """Stock Homepage"""
 
-    return render_template('home.html', current_user=current_user, title = 'Home')
+    return render_template('stock_home.html', current_user=current_user, title = 'Stock_Home')
 
 
 
-@stock_bp.route('/_histo_graph')
+@stock_bp.route('/_stock_histo_graph')
 @login_required
 def histo_graph():
 
@@ -43,7 +43,7 @@ def histo_graph():
 
 
 
-@stock_bp.route("/single", methods=["GET", "POST"])
+@stock_bp.route("/stock_single", methods=["GET", "POST"])
 @login_required
 def single():
     """Request single stock data."""
@@ -100,11 +100,11 @@ def single():
             if item['lang'] != 'en':
                 news_source.remove(item)
 
-        return render_template('index.html', symbol = symbol, graph=graph_img, logo=comp_logo, news=news_source, quote=quote, comp=comp, title = 'Graph')
+        return render_template('stock_index.html', symbol = symbol, graph=graph_img, logo=comp_logo, news=news_source, quote=quote, comp=comp, title = 'Stock_Graph')
 
-    return render_template("quote.html", form=form, title = "Quote")
+    return render_template("stock_quote.html", form=form, title = "Stock_Quote")
 
-@stock_bp.route('/_comp_graph')
+@stock_bp.route('/_stock_comp_graph')
 @login_required
 def comp_graph():
 
@@ -137,7 +137,7 @@ def comp_graph():
 	return jsonify(graph=graph_img)
 
 
-@stock_bp.route("/compare", methods=["GET", "POST"])
+@stock_bp.route("/stock_compare", methods=["GET", "POST"])
 @login_required
 def compare():
     print(session)
@@ -266,15 +266,15 @@ def compare():
         graph_img = render_graph_comp(graph_data1, graph_data2, graph_data3, name1, name2, name3, rng)
 
         # Return the comprison page with company data
-        return render_template('comparison.html', syms = symbols_all, graph=graph_img,
+        return render_template('stock_comparison.html', syms = symbols_all, graph=graph_img,
                                 logo=comp_logo, quotes=quotes_all, num = number,
-                                names = names, title = 'Comparison')
+                                names = names, title = 'Stock_Comparison')
 
-    return render_template("compare.html", form=form, title = "Compare")
+    return render_template("stock_compare.html", form=form, title = "Stock_Compare")
 
 
 
-@stock_bp.route("/_index", methods=["POST"])
+@stock_bp.route("/_stock_index", methods=["POST"])
 @login_required
 def index():
 
@@ -331,10 +331,10 @@ def index():
 
 
 
-        return render_template('index.html', symbol = symbol, graph=graph_img, logo=comp_logo, quote=quote, comp=comp, news=news_source, title = 'Graph')
+        return render_template('stock_index.html', symbol = symbol, graph=graph_img, logo=comp_logo, quote=quote, comp=comp, news=news_source, title = 'Stock_Graph')
 
 
-@stock_bp.route("/_add_stock_db")
+@stock_bp.route("/_stock_add_stock_db")
 @login_required
 def add_stock():
     userid = current_user.id
@@ -360,7 +360,7 @@ def add_stock():
     return jsonify(cat=cat, message=message)
 
 
-@stock_bp.route("/_remove_stock_db")
+@stock_bp.route("/_stock_remove_stock_db")
 @login_required
 def remove_stock():
     userid = current_user.id
@@ -374,7 +374,26 @@ def remove_stock():
     db.session.commit()
 
     flash("Stock Successfully removed from Tracking", 'success')
-    return redirect(url_for("user_bp.dashboard"))
+    return redirect(url_for("stock_bp.dashboard"))
+
+
+@stock_bp.route("/stock_dashboard")
+@login_required
+def dashboard():
+
+    userid = current_user.id
+
+    stockquery = UserStock.query.filter_by(userid = userid).all()
+
+    watch = []
+
+    for stock in stockquery:
+        date = stock.created.strftime("%m/%d/%Y")
+        sym = stock.symbol.upper()
+        name = stock.name
+        watch.append({'date':date, 'symbol':sym, 'name':name})
+
+    return render_template("stock_dashboard.html", current_user=current_user, watch = watch, title = 'Stock_Dashboard')
 
 
 '''

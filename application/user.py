@@ -10,7 +10,7 @@ from .forms import RegisterForm, LoginForm, ChangePWForm
 user_bp = Blueprint( 'user_bp', __name__)
 
 
-@user_bp.route("/register", methods=["GET", "POST"])
+@user_bp.route("/user_register", methods=["GET", "POST"])
 def register():
     """Register user"""
 
@@ -32,11 +32,11 @@ def register():
         flash("Email already in use", 'warning')
         return redirect(url_for("user_bp.register"))
 
-    return render_template("register.html",form = form, title = 'Register')
+    return render_template("user_register.html",form = form, title = 'User_Register')
 
 
 
-@user_bp.route("/login", methods=["GET", "POST"])
+@user_bp.route("/user_login", methods=["GET", "POST"])
 def login():
     """ login users """
     form = LoginForm()
@@ -54,7 +54,7 @@ def login():
         flash('Email does not exist','warning')
         return redirect(url_for('user_bp.login'))
 
-    return render_template("login.html",form = form, title = 'Log-In')
+    return render_template("user_login.html",form = form, title = 'User_Log-In')
 
 @user_bp.route("/logout")
 @login_required
@@ -81,26 +81,7 @@ def unauthorized():
     flash('You must be logged in', 'warning')
     return redirect(url_for('user_bp.login'))
 
-
-@user_bp.route("/dashboard")
-@login_required
-def dashboard():
-
-    userid = current_user.id
-
-    stockquery = UserStock.query.filter_by(userid = userid).all()
-
-    watch = []
-
-    for stock in stockquery:
-        date = stock.created.strftime("%m/%d/%Y")
-        sym = stock.symbol.upper()
-        name = stock.name
-        watch.append({'date':date, 'symbol':sym, 'name':name})
-
-    return render_template("dashboard.html", current_user=current_user, watch = watch)
-
-@user_bp.route("/changepw", methods=["GET", "POST"])
+@user_bp.route("/user_changepw", methods=["GET", "POST"])
 @login_required
 def changepw():
 
@@ -125,7 +106,7 @@ def changepw():
 
         db.session.commit()
         flash("Password successfully Changed", 'success')
-        return redirect(url_for('user_bp.dashboard'))
+        return redirect(url_for('stock_bp.dashboard'))
 
 
-    return render_template("changepw.html",form=form, current_user=current_user)
+    return render_template("user_changepw.html",form=form, current_user=current_user)
