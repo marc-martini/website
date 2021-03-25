@@ -18,7 +18,7 @@ def stock_home():
 
 
 
-@stock_bp.route('/_histo_graph')
+@stock_bp.route('/_stock_histo_graph')
 @login_required
 def histo_graph():
 

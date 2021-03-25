@@ -1,6 +1,6 @@
 $(function() {
 		$('#rng1').bind('change', function() {
-		    $.getJSON('/_histo_graph', {
+		    $.getJSON('/_stock_histo_graph', {
 			  rng : $('#rng1').val(), sym : $("#stock").data('stock'), stock_name : $("#stock").data('name')
 			}, function(data) {
 			  $(".histo").remove();
