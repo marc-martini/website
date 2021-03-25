@@ -104,7 +104,7 @@ def quote_data(user_symbol):
 
     try:
         quote_all = response_chart.json()
-        earn = earn_chart.json()
+        # earn = earn_chart.json()
 
 
         quote_data.update([
@@ -120,7 +120,7 @@ def quote_data(user_symbol):
                 ("ytdchange" , quote_all["ytdChange"]),
                 ("currentmarket" , quote_all["isUSMarketOpen"]),
                 ("change_per" , percent(quote_all["changePercent"])),
-                ("eps" , currency(earn["earnings"][0]['actualEPS']))
+                ("eps" , None)
                 ])
 
         return quote_data
