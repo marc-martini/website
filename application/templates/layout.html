@@ -22,7 +22,7 @@
     <body>
 
         <nav class="navbar navbar-expand-sm navbar-light bg-light border border-dark">
-            <a class="navbar-brand" id="main_name" href= "{{ url_for('main.home') }}" ><span class="black">Home</span></a>
+            <a class="navbar-brand" id="main_name" href= "{{ url_for('main_bp.home') }}" ><span class="black">Home</span></a>
             <a class="navbar-brand" id="main_name" href= "{{ url_for('stock_bp.stock_home') }}" ><span class="black">My Portfolio Manager</span></a>
             <div class="collapse navbar-collapse" id="navbar">
                 {% if current_user.is_authenticated %}
