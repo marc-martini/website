@@ -44,13 +44,13 @@
                         </tr>
                         {% if current_user.is_authenticated %}
                         <tr>
-                            <th><h3><a class="nav-link" href="{{ url_for('user_bp.dashboard') }}">{{current_user.firstname}} {{current_user.lastname}}'s Dashboard</a></h3>
+                            <th><h3><a class="nav-link" href="{{ url_for('stock_bp.dashboard') }}">{{current_user.firstname}} {{current_user.lastname}}'s Dashboard</a></h3>
                             <p>View your current dashboard for quick access to your watchlist. </p>
                             <p>Here you can edit this watchlist.</p></th>
                         </tr>
                         {% else %}
                         <tr>
-                            <th ><h3><a class="nav-link" href="{{ url_for('user_bp.dashboard') }}">Dashboard</a></h3>
+                            <th ><h3><a class="nav-link" href="{{ url_for('stock_bp.dashboard') }}">Dashboard</a></h3>
                             <p>View your current dashboard for quick access to your watchlist. </p>
                             <p>Here you can edit this watchlist.</p></th>
                         </tr>
