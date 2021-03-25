@@ -48,7 +48,7 @@ def login():
             if check_password_hash(user_exist.password, form.password.data):
                 login_user(user_exist)
                 flash("Account successfully Logged In", 'success')
-                return redirect(url_for('stock_bp.home'))
+                return redirect(url_for('stock_bp.stock_home'))
             flash('Incorrect Password','warning')
             return redirect(url_for('user_bp.login'))
         flash('Email does not exist','warning')
@@ -64,7 +64,7 @@ def logout():
     # Forget any user_id
     session.clear()
     flash("Account successfully logged Out", 'success')
-    return redirect(url_for('stock_bp.home'))
+    return redirect(url_for('stock_bp.stock_home'))
 
 
 @login_manager.user_loader
