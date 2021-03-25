@@ -30,11 +30,10 @@ def histo_data(user_symbol, rng):
     response_chart = requests.get("https://sandbox.iexapis.com/stable/stock/{}/chart/{}?token={}".format(symbol,chart_range,api_key_test))
 
     # Full calls for API data
-'''
-    api_key = os.getenv("API_KEY")
-    response_chart = requests.get("https://cloud-sse.iexapis.com/stable/stock/{}/chart/{}?token={}".format(symbol,chart_range,api_key))
-    print(response_chart)
-'''
+
+    # api_key = os.getenv("API_KEY")
+    # response_chart = requests.get("https://cloud-sse.iexapis.com/stable/stock/{}/chart/{}?token={}".format(symbol,chart_range,api_key))
+    # print(response_chart)
 
     # get the JSON response
     try:
