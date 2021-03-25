@@ -25,12 +25,12 @@
         </tr>
         {% for stock in watch %}
         <tr>
-        <td><form action="/_index" method="post">
+        <td><form action="/_stock_index" method="post">
                 <button type="submit" name='stock' class = btn-link value="{{stock.symbol}}">{{stock.name}}</button>
             </form></td>
         <td>{{stock.symbol}}</td>
         <td>{{stock.date}}</td>
-        <td> <form class="remove_stock" action="/_remove_stock_db">
+        <td> <form class="remove_stock" action="/_stock_remove_stock_db">
             <input type="hidden" name="sym" value="{{stock.symbol}}" />
             <input type="hidden" name="name" value="{{stock.name}}" />
             <button class="btn btn-secondary" type="submit">Stop Tracking</button>
@@ -38,7 +38,7 @@
         {% endfor %}
     </table>
 
-    <form class="change" action="/changepw">
+    <form class="change" action="/user_changepw">
         <button class="btn btn-secondary" type="submit">Change Password</button>
     </form>
 {% endblock %}

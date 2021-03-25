@@ -51,7 +51,7 @@
                         {% for name in names %}
                             <th>
                                 <img src="{{logo[loop.index - 1]}}" alt="{{quotes[loop.index - 1]['symbol']}} Logo" style="float:left;width:30px;height:30px;margin-right:2.5px;">
-                                <form action="/_index" method="post">
+                                <form action="/_stock_index" method="post">
                                     <button type="submit" name='stock' class = btn-link value="{{syms[loop.index - 1]}}" >{{name}}</button>
                                 </form>
                             </th>
@@ -173,6 +173,3 @@
     </footer>
 
 {% endblock %}
-
-
-
