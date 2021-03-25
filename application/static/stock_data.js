@@ -1,6 +1,6 @@
 $(function() {
 		$('#rng1').bind('change', function() {
-		    $.getJSON('/_histo_graph', {
+		    $.getJSON('/_stock_histo_graph', {
 			  rng : $('#rng1').val(), sym : $("#stock").data('stock'), stock_name : $("#stock").data('name')
 			}, function(data) {
 			  $(".histo").remove();
@@ -15,7 +15,7 @@ $(function() {
 
 $(function() {
 	$('#rng').bind('change', function() {
-		$.getJSON('/_comp_graph', {
+		$.getJSON('/_stock_comp_graph', {
     		  rng : $('#rng').val(),
     		  sym1 : $("#stock1").data('stock'), stock_name1 : $("#stock1").data('name'),
     		  sym2 : $("#stock2").data('stock'), stock_name2 : $("#stock2").data('name'),
@@ -33,7 +33,7 @@ $(function() {
 
 
 function add_stock_db(id) {
-    $.getJSON("/_add_stock_db", {
+    $.getJSON("/_stock_add_stock_db", {
         sym : $(id).data('stock'),
         name : $(id).data('name')
     }, function(data) {
@@ -44,7 +44,7 @@ function add_stock_db(id) {
 }
 
 function remove_stock_db(sym,name) {
-    $.getJSON("/_remove_stock_db", {
+    $.getJSON("/_stock_remove_stock_db", {
         sym : sym,
         name : name
     });
