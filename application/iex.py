@@ -34,7 +34,6 @@ def histo_data(user_symbol, rng):
 
     # Test calls for API data to configure
 
-
     api_key_test = os.getenv("API_KEY_test")
     response_chart = requests.get("https://sandbox.iexapis.com/stable/stock/{}/chart/{}?token={}".format(symbol,chart_range,api_key_test))
 
