@@ -1,0 +1,16 @@
+Required Packages to install
+
+
+pip install Flask-Session
+
+pip install Flask-SQLAlchemy
+
+pip install Flask-Login
+
+pip install python-dotenv
+
+pip install Flask-WTF
+
+pip install email_validator
+
+pip install pygal
