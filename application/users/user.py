@@ -4,10 +4,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 
 from .db_models import db, User, UserStock
-from . import login_manager
-from .forms import RegisterForm, LoginForm, ChangePWForm
+from .. import login_manager
+from ..forms import RegisterForm, LoginForm, ChangePWForm
 
-user_bp = Blueprint( 'user_bp', __name__)
+user_bp = Blueprint( 'user_bp', __name__,static_folder='static',static_url_path='/users/static',template_folder='templates')
 
 
 @user_bp.route("/user_register", methods=["GET", "POST"])

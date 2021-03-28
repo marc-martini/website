@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, redirect, url_for, request, jsonify, flash, session
 from flask_login import current_user, login_required
-from datetime import datetime
-from .plot import render_graph_histo, render_graph_comp
-from .iex import histo_data, quote_data, logo, company_data, news
-from .forms import Stock, CompStock
-from .db_models import db, UserStock
+#from datetime import datetime
+#from .plot import render_graph_histo, render_graph_comp
+#from .iex import histo_data, quote_data, logo, company_data, news
+#from .forms import Stock, CompStock
+from .users.db_models import db, UserStock
+from .users.user import load_user
 
 # Blueprint Configuration
 main_bp = Blueprint('main_bp', __name__)

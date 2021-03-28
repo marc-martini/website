@@ -22,8 +22,9 @@ def create_app():
 
     with app.app_context():
         # Application Routes
-        #from . import routes, user, stocks
-        from . import user, stock, main
+        from . import main
+        from .users import user
+        from .app_stock import stock
 
         db.create_all()
 

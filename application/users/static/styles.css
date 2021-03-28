@@ -1,0 +1,192 @@
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: 2.5em;
+}
+
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+.dash .form-group
+{
+    /* center form controls */
+    text-align: center;
+    transform: translate(0%, 0%);
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+
+#quoted {
+  text-decoration: underline;
+  font-weight: bold
+}
+
+#index_table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 15px;
+    text-align: left;
+    border-spacing: 5px;
+}
+
+.left-form {
+    display : inline;
+    float:left;
+    margin-left: 10%;
+    margin-top:20px;
+}
+
+.right-form {
+    display : inline;
+    float:right;
+    margin-right: 10%;
+    margin-top:20px;
+}
+
+.change {
+     position: fixed;
+     bottom: 0;
+     right: 0;
+}
+
+
+
+.btn-link {
+        border: none;
+        outline: none;
+        background: none;
+        cursor: pointer;
+        padding: 0;
+        font-family: inherit;
+        font-size: inherit;
+}
+
+.nav-item {
+    font-size: 1.75em;
+}
+
+#logout {
+    font-size: 1em;
+    border-left: 2px solid grey;
+}
+
+.table {
+  text-align: left;
+  padding: 15px;
+}
+
+td {
+    text-align: left;
+}
+
+#logo {
+    float:right;
+    width:auto;
+    height:100px;
+    display: inline-block;
+    padding-right:50px;
+}
+
+#comp_name {
+    text-align: left;
+    vertical-align: text-bottom;
+}
+
+
+.badge, .text-time {
+    font-size:10px;
+
+}
+
+.img-fluid {
+  height: 100%;
+  width: 30%;
+  background-color: powderblue;
+}
+
+#news_summ  {
+	height: 65px;
+    width: 100%;
+}
+
+
+#title-lm{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.card {
+  width: 100%;
+}
+
+a:hover {
+	display: block;
+	text-decoration:none
+}
+
+#news_dets {
+	display: grid;
+  	grid-template-columns: 50% 50%
+}
+
+
+#news_date {
+	text-align: right;
+	padding-right: 2px;
+}
+
+.histo {
+    width: 100%;
+    height:auto;
+}
+
+#name_det {
+    text-align: center;
+    margin:auto;
+}
+
+#table_det {
+    text-align: right;
+    border-top: 0px;
+}
+
+#all_tool{
+    text-align: center;
+    border-top: 0px;
+
+}
+
+.mid_tool {
+    border:none;
+    text-align: center;
+    border-style : hidden!important;
+}
+
+#main_name{
+    font-family: 'Balthazar';
+
+}

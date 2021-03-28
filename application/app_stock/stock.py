@@ -3,11 +3,11 @@ from flask_login import current_user, login_required
 from datetime import datetime
 from .plot import render_graph_histo, render_graph_comp
 from .iex import histo_data, quote_data, logo, company_data, news
-from .forms import Stock, CompStock
-from .db_models import db, UserStock
+from ..forms import Stock, CompStock
+from ..users.db_models import db, UserStock
 
 # Blueprint Configuration
-stock_bp = Blueprint('stock_bp', __name__)
+stock_bp = Blueprint('stock_bp', __name__,static_folder='static',static_url_path='/app_stock/static',template_folder='templates')
 
 
 @stock_bp.route('/stock', methods=['GET'])

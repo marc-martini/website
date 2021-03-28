@@ -19,6 +19,6 @@ class Config:
     SESSION_TYPE = "filesystem"
 
     # database
-    SQLALCHEMY_DATABASE_URI = "sqlite:///stocks.db"
+    SQLALCHEMY_DATABASE_URI = "sqlite:///app_stock/stocks.db"
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False

@@ -1,4 +1,4 @@
-from . import db
+from .. import db
 from flask_login import UserMixin
 
 # app user db model
@@ -39,4 +39,3 @@ class UserStock(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User {}; Stock {}>'.format(self.userid, self.symbol)
-
