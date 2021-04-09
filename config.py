@@ -21,7 +21,7 @@ class Config:
 
     # database
     password = os.getenv('mysql_key')
-    SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://MarcMartinho:{}@MarcMartinho.mysql.pythonanywhere-services.com/users".format(password)
+    SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://MarcMartinho:{}@MarcMartinho.mysql.pythonanywhere-services.com/MarcMartinho$users".format(password)
     #SQLALCHEMY_DATABASE_URI = "mysql://MarcMartinho:{DB_PW}@MarcMartinho.mysql.pythonanywhere-services.com/users.db".format(DB_PW)
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
