@@ -19,6 +19,7 @@ class Config:
     SESSION_TYPE = "filesystem"
 
     # database
-    SQLALCHEMY_DATABASE_URI = "sqlite:///app_stock/stocks.db"
+    DB_PW = os.getenv('mysql_key')
+    SQLALCHEMY_DATABASE_URI = "mysql://MarcMartinho:{}@MarcMartinho.mysql.pythonanywhere-services.com/users.db".format(DB_PW)
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
