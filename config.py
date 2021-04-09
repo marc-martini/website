@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from tempfile import mkdtemp
+import mysql.connector
 import os
 
 load_dotenv()
