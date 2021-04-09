@@ -20,7 +20,7 @@ class Config:
 
     # database
     password = os.getenv('mysql_key')
-    username = 'MarcMartinho'
+    username = "MarcMartinho"
     server = 'MarcMartinho.mysql.pythonanywhere-services.com'
     SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{server}/users".format(username, password, server)
     #SQLALCHEMY_DATABASE_URI = "mysql://MarcMartinho:{DB_PW}@MarcMartinho.mysql.pythonanywhere-services.com/users.db".format(DB_PW)
