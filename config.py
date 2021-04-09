@@ -19,7 +19,10 @@ class Config:
     SESSION_TYPE = "filesystem"
 
     # database
-    DB_PW = os.getenv('mysql_key')
-    SQLALCHEMY_DATABASE_URI = "mysql://MarcMartinho:{}@MarcMartinho.mysql.pythonanywhere-services.com/users.db".format(DB_PW)
+    password = os.getenv('mysql_key')
+    username = 'MarcMartinho'
+    server = 'MarcMartinho.mysql.pythonanywhere-services.com'
+    SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{server}/users".format(username, password, server)
+    #SQLALCHEMY_DATABASE_URI = "mysql://MarcMartinho:{DB_PW}@MarcMartinho.mysql.pythonanywhere-services.com/users.db".format(DB_PW)
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False

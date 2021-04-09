@@ -14,3 +14,5 @@ pip install Flask-WTF
 pip install email_validator
 
 pip install pygal
+
+pip install pymysql
